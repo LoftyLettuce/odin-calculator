@@ -37,6 +37,8 @@ div
 {
   border: none;
   flex-grow: 1;
+  outline: none;
+  font-size: 30px;
 }
 .result
 {
