@@ -1,0 +1,41 @@
+div 
+{
+  border: 1px solid;
+}
+.frame
+{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50vw;
+  height: 80vh;
+}
+.keyboard
+{
+  flex-grow: 2;
+  display: flex;
+}
+.numbers
+{
+  flex-grow: 2;
+}
+.operators
+{
+  flex-grow: 1;
+}
+.display
+{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.expressions
+{
+  border: none;
+  flex-grow: 1;
+}
+.result
+{
+  border: none;
+  flex-grow: 1;
+}
