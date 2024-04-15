@@ -13,17 +13,20 @@ div
   margin: auto;
   width: 50vw;
   height: 80vh;
+  border: none;
 }
 .keyboard
 {
   flex-grow: 2;
   display: flex;
+  border: none;
 }
 .numbers
 {
   flex-grow: 2;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 .operators
 {
@@ -51,13 +54,22 @@ div
 }
 .row
 {
+  max-height: 20%;
   flex-grow: 1;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  border: none;
 }
 .key
 {
-  flex-grow: 1;
+  max-width: 30%;
+  flex: 1 1 0;
+  background-color: white;
+  font-size: 30px;
+  padding: 1px;
   border: 1px solid;
-  justify-content: space-around;
+}
+.key:active
+{
+  background-color: aliceblue;
 }
