@@ -23,6 +23,7 @@ div
 }
 .numbers
 {
+  border-right: none;
   flex-grow: 2;
   display: flex;
   flex-direction: column;
@@ -33,12 +34,14 @@ div
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 .display
 {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  border-bottom: none;
 }
 .expressions
 {
