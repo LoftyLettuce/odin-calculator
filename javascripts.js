@@ -20,16 +20,12 @@ for (let i = 0, number = 9, lastRow = ['.', 0, 'x']; i < 4; i++)
   }
 }
 //buttons for operators
-for (let i = 0, operators = ["=", "x", "/", "+", "-"], numberButton = 2; i < 3; i++)
+for (let i = 0, operators = ["=", "del", "x", "/", "+", "-"]; i < 3; i++)
 {
   let u = document.querySelector('.operators');
   let row = u.appendChild(document.createElement('div'));
   row.className = "row";
-  if (i == 2)
-  {
-    numberButton--;
-  }
-  for (let u = 0; u < numberButton; u++)
+  for (let u = 0; u < 2; u++)
   {
     let key = row.appendChild(document.createElement('button'));
     key.className = "key";
@@ -44,7 +40,14 @@ keyboard.addEventListener('click', (event) =>
 {
   if (event.target.className == 'key')
   {
-    input.value += event.target.textContent;
+    if (event.target.textContent != "del")
+    {
+      input.value += event.target.textContent;   
+    }
+    else
+    {
+      input.value = input.value.slice(0, input.value.length-1);
+    }
   }
 }
 );
