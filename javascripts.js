@@ -36,6 +36,7 @@ for (let i = 0, operators = ["=", "del", "x", "/", "+", "-"]; i < 3; i++)
 //input
 let input = document.querySelector(".expressions");
 let keyboard = document.querySelector(".keyboard");
+input.focus();
 keyboard.addEventListener('click', (event) => 
 {
   if (event.target.className == 'key')
@@ -49,5 +50,17 @@ keyboard.addEventListener('click', (event) =>
       input.value = input.value.slice(0, input.value.length-1);
     }
   }
-}
-);
+  input.focus();
+});
+input.addEventListener('keydown', (event) =>
+{
+  if (event.key.charCodeAt(0) > 64 && event.key != 'Backspace')
+  {
+    event.preventDefault();
+  }
+  else if (event.key.charCodeAt(0) == 42)
+  {
+    event.preventDefault();
+    input.value+='x';
+  }
+})
