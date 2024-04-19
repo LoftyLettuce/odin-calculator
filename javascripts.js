@@ -33,37 +33,6 @@ for (let i = 0, operators = ["=", "del", "x", "/", "+", "-"]; i < 3; i++)
     operators.pop();
   }
 }
-//input
-let input = document.querySelector(".expressions");
-let keyboard = document.querySelector(".keyboard");
-input.focus();
-keyboard.addEventListener('click', (event) => 
-{
-  if (event.target.className == 'key')
-  {
-    if (event.target.textContent != "del")
-    {
-      input.value += event.target.textContent;   
-    }
-    else
-    {
-      input.value = input.value.slice(0, input.value.length-1);
-    }
-  }
-  input.focus();
-});
-input.addEventListener('keydown', (event) =>
-{
-  if (event.key.charCodeAt(0) > 64 && event.key != 'Backspace')
-  {
-    event.preventDefault();
-  }
-  else if (event.key.charCodeAt(0) == 42)
-  {
-    event.preventDefault();
-    input.value+='x';
-  }
-})
 //operate
 function priority(operate)
 {
@@ -149,3 +118,50 @@ function operate(value){
   }
   return numbers[0];
 };
+//output
+function display(value)
+{
+  let result = document.querySelector(".result");
+  result.textContent = operate(value);
+}
+//input
+let input = document.querySelector(".expressions");
+let keyboard = document.querySelector(".keyboard");
+//input reset
+function resetInput()
+{
+  input.value = "";
+  input.focus();
+}
+keyboard.addEventListener('click', (event) => 
+{
+  if (event.target.className == 'key')
+  {
+    if (event.target.textContent == "del")
+    {
+      input.value = input.value.slice(0, input.value.length-1);
+    }
+    else if (event.target.textContent == "=")
+    {
+      display(input.value);
+      resetInput();
+    }
+    else
+    {
+      input.value += event.target.textContent;   
+    }
+  }
+  input.focus();
+});
+input.addEventListener('keydown', (event) =>
+{
+  if (event.key.charCodeAt(0) > 64 && event.key != 'Backspace')
+  {
+    event.preventDefault();
+  }
+  else if (event.key.charCodeAt(0) == 42)
+  {
+    event.preventDefault();
+    input.value+='x';
+  }
+})
