@@ -66,18 +66,22 @@ function lastIndex(target)
 {
   return target.length-1;
 }
-function caculate(a, b, o)
+function caculate(n, o)
 {
-  console.log(`${a} ${b} ${o}`);
-  return (operator[o](a, b));
+  console.log(`${n} ${o}`);
+  const a = n[lastIndex(n)];
+  n.pop();
+  const b = n[lastIndex(n)];
+  n.pop();
+  const x = o[lastIndex(o)];
+  o.pop();
+  return (operator[x](a, b));
 }
 function operate(value){
   let numbers =[];
   let operators =[];
   for (let i  = 0, number = 0; i < value.length; i ++)
   {
-    let lastOp = operators.length-1;
-    let lastNum = numbers.length-1;
     if (isNumber(value[i]))
     {
       number = number*10 + Number(value[i]);
@@ -91,14 +95,10 @@ function operate(value){
       if (value[i] == ")")
       {
         numbers.push(number);
-        lastNum++;
-        for (let u = lastOp; operators[u] != "(" ; u--)
+        for (let u = lastIndex(operators); operators[u] != "(" ; u--)
         {
           console.log(numbers);
-          let result = caculate(numbers[lastNum--], numbers[lastNum], operators[u]);
-          numbers.pop();
-          numbers.pop();
-          operators.pop();
+          const result = caculate(numbers, operators);
           numbers.push(result);
         }
         operators.pop();
@@ -112,29 +112,22 @@ function operate(value){
     {
       console.log(number);
       numbers.push(number);
-      lastNum++;
       number = 0;
       if (operators.length != 0)
       {
-        if (priority(operators[lastOp]) <= priority(value[i]))
+        if (priority(operators[lastIndex(operators)]) <= priority(value[i]))
         {
-          let result = caculate(numbers[lastNum--], numbers[lastNum], operators[lastOp]);
-          operators.pop();
-          numbers.pop();
-          numbers.pop();
+          const result = caculate(numbers, operators);
           numbers.push(result);
         }
       }
       operators.push(value[i]);
     }
   }
-  for (let i = operators.length-1, lastNum = numbers.length-1; i > -1; i--)
+  for (let i = lastIndex(operators); i > -1; i--)
   {
     console.log(numbers);
-    let result = caculate(numbers[lastNum--], numbers[lastNum], operators[i]);
-    numbers.pop();
-    numbers.pop();
-    operators.pop();
+    const result = caculate(numbers, operators);
     numbers.push(result);
   }
   return numbers[0];
