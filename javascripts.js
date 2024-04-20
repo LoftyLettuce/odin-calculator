@@ -75,7 +75,7 @@ function caculate(n, o)
   n.pop();
   const x = o[lastIndex(o)];
   o.pop();
-  return (operator[x](a, b));
+  return (operator[x](b, a));
 }
 function operate(value){
   let numbers =[];
@@ -136,7 +136,7 @@ function operate(value){
 function display(value)
 {
   let result = document.querySelector(".result");
-  result.textContent = operate(value);
+  result.textContent = `${value} = ${operate(value)}`;
 }
 //input
 let input = document.querySelector(".expressions");
