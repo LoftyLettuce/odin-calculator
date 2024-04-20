@@ -80,21 +80,21 @@ function caculate(n, o)
 function operate(value){
   let numbers =[];
   let operators =[];
-  for (let i  = 0, number = 0; i < value.length; i ++)
+  for (let i  = 0, number = ""; i < value.length; i ++)
   {
-    if (isNumber(value[i]))
+    if (isNumber(value[i]) || value[i] == ".")
     {
-      number = number*10 + Number(value[i]);
+      number += value[i];
       if (i == lastIndex(value))
       {
-        numbers.push(number);
+        numbers.push(Number(number));
       }
     }
     else if (isBracket(value[i]))
     {
       if (value[i] == ")")
       {
-        numbers.push(number);
+        numbers.push(Number(number));
         for (let u = lastIndex(operators); operators[u] != "(" ; u--)
         {
           console.log(numbers);
@@ -111,8 +111,8 @@ function operate(value){
     else 
     {
       console.log(number);
-      numbers.push(number);
-      number = 0;
+      numbers.push(Number(number));
+      number = "";
       if (operators.length != 0)
       {
         if (priority(operators[lastIndex(operators)]) <= priority(value[i]))
@@ -142,6 +142,7 @@ function display(value)
 let input = document.querySelector(".expressions");
 let keyboard = document.querySelector(".keyboard");
 let openBracket = true;
+let decimal = true;
 //input reset
 function resetInput()
 {
@@ -154,6 +155,10 @@ keyboard.addEventListener('click', (event) =>
 {
   if (event.target.className == 'key')
   {
+    if (!isNumber(event.target.textContent) && event.target.textContent != ".")
+    {
+      decimal = true;
+    }
     if (event.target.textContent == "del")
     {
       input.value = input.value.slice(0, input.value.length-1);
@@ -175,6 +180,14 @@ keyboard.addEventListener('click', (event) =>
       }
       openBracket = !openBracket;
     }
+    else if (event.target.textContent == ".")
+    {
+      if (decimal)
+      {
+        decimal = false;
+        input.value += ".";
+      }
+    }
     else
     {
       input.value += event.target.textContent;   
@@ -186,7 +199,22 @@ keyboard.addEventListener('click', (event) =>
 input.addEventListener('keydown', (event) =>
 {
   let keyCode = event.key.charCodeAt(0);
-  if (keyCode < 40 || (keyCode > 57 && event.key != "Backspace") || keyCode == 44)
+  if (!isNumber(event.key) && event.key != ".")
+  {
+    decimal = true;
+  }
+  if (event.key == ".")
+  {
+    if (!decimal)
+    {
+      event.preventDefault();
+    }
+    else
+    {
+      decimal = false;
+    }
+  }
+  else if (keyCode < 40 || (keyCode > 57 && event.key != "Backspace") || keyCode == 44)
   {
     event.preventDefault();
   }
