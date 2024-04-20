@@ -147,6 +147,8 @@ function resetInput()
   input.value = "";
   input.focus();
 }
+resetInput();
+//Visual keyboard
 keyboard.addEventListener('click', (event) => 
 {
   if (event.target.className == 'key')
@@ -167,9 +169,11 @@ keyboard.addEventListener('click', (event) =>
   }
   input.focus();
 });
+//User keyboard
 input.addEventListener('keydown', (event) =>
 {
-  if (event.key.charCodeAt(0) > 64 && event.key != 'Backspace')
+  let keyCode = event.key.charCodeAt(0);
+  if (keyCode < 40 || (keyCode > 57 && event.key != "Backspace") || keyCode == 44)
   {
     event.preventDefault();
   }
