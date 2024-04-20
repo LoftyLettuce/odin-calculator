@@ -1,5 +1,5 @@
 //button for numbers
-for (let i = 0, number = 9, lastRow = ['.', 0, 'x']; i < 4; i++)
+for (let i = 0, number = 9, lastRow = ['.', 0, '()']; i < 4; i++)
 {
   let u = document.querySelector('.numbers');
   let row = u.appendChild(document.createElement('div'));
@@ -141,6 +141,7 @@ function display(value)
 //input
 let input = document.querySelector(".expressions");
 let keyboard = document.querySelector(".keyboard");
+let openBracket = true;
 //input reset
 function resetInput()
 {
@@ -161,6 +162,18 @@ keyboard.addEventListener('click', (event) =>
     {
       display(input.value);
       resetInput();
+    }
+    else if (event.target.textContent == "()")
+    {
+      if (openBracket)
+      {
+        input.value += "(";
+      }
+      else
+      {
+        input.value += ")";
+      }
+      openBracket = !openBracket;
     }
     else
     {
