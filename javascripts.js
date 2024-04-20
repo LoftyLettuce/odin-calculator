@@ -52,9 +52,9 @@ function isNumber(x)
 {
   return (!isNaN(Number(x)));
 }
-function isCloseBracket(char)
+function isBracket(char)
 {
-  return (char == ")");
+  return (char == ")" || char == "(");
 }
 const operator = {
   "+" : (a, b) => (a+b),
@@ -62,8 +62,13 @@ const operator = {
   "x" : (a, b) => (a*b),
   "/" : (a, b) => (a/b),
 };
+function lastIndex(target)
+{
+  return target.length-1;
+}
 function caculate(a, b, o)
 {
+  console.log(`${a} ${b} ${o}`);
   return (operator[o](a, b));
 }
 function operate(value){
@@ -76,33 +81,48 @@ function operate(value){
     if (isNumber(value[i]))
     {
       number = number*10 + Number(value[i]);
-      if (i == value.length -1)
+      if (i == lastIndex(value))
       {
         numbers.push(number);
       }
     }
-    else if (isCloseBracket(value[i]))
+    else if (isBracket(value[i]))
     {
-      for (let u = lastOp; operators[u] != "(" ; u--)
+      if (value[i] == ")")
       {
-        let result = caculate(numbers[lastNum--], numbers[lastNum], operators[u]);
-        numbers.pop();
-        numbers.pop();
+        numbers.push(number);
+        lastNum++;
+        for (let u = lastOp; operators[u] != "(" ; u--)
+        {
+          console.log(numbers);
+          let result = caculate(numbers[lastNum--], numbers[lastNum], operators[u]);
+          numbers.pop();
+          numbers.pop();
+          operators.pop();
+          numbers.push(result);
+        }
         operators.pop();
-        numbers.push(result);
+      }
+      else
+      {
+        operators.push(value[i]);
       }
     }
     else 
     {
       console.log(number);
       numbers.push(number);
+      lastNum++;
       number = 0;
       if (operators.length != 0)
       {
         if (priority(operators[lastOp]) <= priority(value[i]))
         {
-          caculate(numbers[lastNum--], numbers[lastNum], operators[lastOp]);
+          let result = caculate(numbers[lastNum--], numbers[lastNum], operators[lastOp]);
           operators.pop();
+          numbers.pop();
+          numbers.pop();
+          numbers.push(result);
         }
       }
       operators.push(value[i]);
@@ -110,6 +130,7 @@ function operate(value){
   }
   for (let i = operators.length-1, lastNum = numbers.length-1; i > -1; i--)
   {
+    console.log(numbers);
     let result = caculate(numbers[lastNum--], numbers[lastNum], operators[i]);
     numbers.pop();
     numbers.pop();
