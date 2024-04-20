@@ -1,3 +1,10 @@
+*
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: aliceblue;
+  background-color: black;
+}
 p 
 {
   text-align: center;
@@ -14,16 +21,18 @@ div
   width: 50vw;
   height: 80vh;
   border: none;
+  gap: 1px;
 }
 .keyboard
 {
-  flex-grow: 2;
+  flex-grow: 1.5;
   display: flex;
   border: none;
 }
 .numbers
 {
   border-right: none;
+  border-top: none;
   flex-grow: 2;
   display: flex;
   flex-direction: column;
@@ -35,25 +44,35 @@ div
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  border-top: none;
 }
 .display
 {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  border-bottom: none;
+}
+.display:focus-within
+{
+  border: none;
+  outline: 1px solid aqua;
+  overflow: visible;
 }
 .expressions
 {
   border: none;
-  flex-grow: 1;
+  flex-grow: 3;
   outline: none;
-  font-size: 30px;
+  caret-color: transparent;
+  text-align: right;
+  padding: 3%;
 }
 .result
 {
   border: none;
   flex-grow: 1;
+  text-align: right;
+  padding: 3%;
 }
 .row
 {
@@ -67,7 +86,7 @@ div
 {
   max-width: 30%;
   flex: 1 1 0;
-  background-color: white;
+  background-color: black;
   font-size: 30px;
   padding: 1px;
   border: 1px solid;
