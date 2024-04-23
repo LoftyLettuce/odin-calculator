@@ -45,7 +45,9 @@ function priority(operate)
     case "x":
       return 1;
     case "/":
-    return 1;
+      return 1;
+    default:
+      return 3;
   }
 }
 function isNumber(x)
@@ -113,13 +115,10 @@ function operate(value){
       console.log(number);
       numbers.push(Number(number));
       number = "";
-      if (operators.length != 0)
+      while (operators.length != 0 && priority(operators[lastIndex(operators)]) <= priority(value[i]))
       {
-        if (priority(operators[lastIndex(operators)]) <= priority(value[i]))
-        {
-          const result = caculate(numbers, operators);
-          numbers.push(result);
-        }
+        const result = caculate(numbers, operators);
+        numbers.push(result);
       }
       operators.push(value[i]);
     }
