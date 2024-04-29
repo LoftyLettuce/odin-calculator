@@ -1,7 +1,7 @@
 *
 {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  font-size: 5vmin;
   color: aliceblue;
   background-color: black;
 }
@@ -11,7 +11,7 @@ p
 }
 div 
 {
-  border: 1px solid;
+  border: 0.2vmin solid;
 }
 .frame
 {
@@ -21,7 +21,7 @@ div
   width: 50vw;
   height: 80vh;
   border: none;
-  gap: 1px;
+  gap: 0.2vmin;
 }
 .keyboard
 {
@@ -55,7 +55,7 @@ div
 .display:focus-within
 {
   border: none;
-  outline: 1px solid aqua;
+  outline: 0.2vmin solid aqua;
   overflow: visible;
 }
 .expressions
@@ -88,9 +88,9 @@ div
   max-width: 30%;
   flex: 1 1 0;
   background-color: black;
-  font-size: 30px;
-  padding: 1px;
-  border: 1px solid;
+  font-size: 5vmin;
+  padding: 0.2vmin;
+  border: 0.2vmin solid;
 }
 .key:active
 {
