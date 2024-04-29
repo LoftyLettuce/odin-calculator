@@ -69,6 +69,7 @@ div
 }
 .result
 {
+  min-height: 1lh;
   border: none;
   flex-grow: 1;
   text-align: right;
