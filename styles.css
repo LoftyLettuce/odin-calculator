@@ -18,8 +18,8 @@ div
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 50vmax;
-  height: 80vmin;
+  width: min(50vmax, 90vw);
+  height: min(80vmin, 80vh);
   max-width: 90vw;
   max-height: 90vh;
   border: none;
